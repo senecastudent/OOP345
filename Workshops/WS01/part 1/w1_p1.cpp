@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
 	//   3: third argument
 	//   ...
 	
-	for (int i = 1; i < argc; i++) {
-		std::cout << " " << i << ": " << argv[i] << std::endl;
+	for (int i = 0; i < argc; i++) {
+		std::cout << "  " << i << ": " << argv[i] << std::endl;
 }
 
 	std::cout << "--------------------------\n\n";
