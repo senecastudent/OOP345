@@ -31,7 +31,7 @@ namespace seneca {
 	{
 		static int count = 1;
 		double billAmt = m_foodPrice * g_taxrate + m_foodPrice;
-		if (m_name) {
+		if (m_name[0]) {
 			std::cout.width(2);
 			std::cout.setf(ios::left);
 			std::cout << count++ << ". ";
