@@ -56,7 +56,7 @@ namespace seneca {
 			std::cout.width(2);
 			std::cout.setf(ios::left);
 			std::cout << count++ << ". ";
-			std::cout << "No Order";
+			std::cout << "No Order" << endl;
 		}
 	}
 }
