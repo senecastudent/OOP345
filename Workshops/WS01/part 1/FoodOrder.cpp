@@ -31,24 +31,33 @@ namespace seneca {
 	{
 		static int count = 1;
 		double billAmt = m_foodPrice * g_taxrate + m_foodPrice;
-		std::cout.width(2);
-		std::cout.setf(ios::left);
-		std::cout << count++ << ". ";
-		std::cout.width(10);
-		std::cout << m_name << "|";
-		std::cout.width(25);
-		std::cout << m_foodDesc << "|";
-		std::cout.width(12);
-		std::cout.precision(2);
-		std::cout.setf(ios::fixed);
-		std::cout << billAmt << "|";
-		std::cout.unsetf(ios::left);
-		if (m_dailySpecial) {
-			std::cout.width(13);
-			std::cout.setf(ios::right);
-			std::cout << billAmt - g_dailydiscount;
-			std::cout.unsetf(ios::right);
+		if (m_name) {
+			std::cout.width(2);
+			std::cout.setf(ios::left);
+			std::cout << count++ << ". ";
+			std::cout.width(10);
+			std::cout << m_name << "|";
+			std::cout.width(25);
+			std::cout << m_foodDesc << "|";
+			std::cout.width(12);
+			std::cout.precision(2);
+			std::cout.setf(ios::fixed);
+			std::cout << billAmt << "|";
+			std::cout.unsetf(ios::left);
+			if (m_dailySpecial) {
+				std::cout.width(13);
+				std::cout.setf(ios::right);
+				std::cout << billAmt - g_dailydiscount;
+				std::cout.unsetf(ios::right);
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
+		else {
+			std::cout.width(2);
+			std::cout.setf(ios::left);
+			std::cout << count++ << ". ";
+			std::cout.width(10);
+			std::cout << "No Order" << endl;
+		}
 	}
 }
