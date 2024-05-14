@@ -10,9 +10,10 @@ namespace seneca {
 	std::istream& FoodOrder::read(std::istream & istr)
 	{
 		if (istr.good()) {
+			istr.getline(m_name, MAX_NAME_SIZE, ',');
+			
 			char temp[100]{};
 			
-			istr.getline(m_name, MAX_NAME_SIZE, ',');
 			if (istr.getline(temp, 100, ',')) {
 				m_foodDesc = new char[strlen(temp) + 1];
 				strcpy(m_foodDesc, temp);
@@ -65,6 +66,8 @@ namespace seneca {
 
 	FoodOrder::~FoodOrder()
 	{
-		delete[] m_foodDesc;
+		if (m_foodDesc != nullptr) {
+			delete[] m_foodDesc;
+		}
 	}
 }
