@@ -16,10 +16,8 @@ namespace seneca {
 
 			istr.getline(temp, 100, ',');
 
-			if (temp[0]) {
-				m_foodDesc = new char[strlen(temp) + 1];
-				strcpy(m_foodDesc, temp);
-			}
+			m_foodDesc = new char[strlen(temp) + 1];
+			strcpy(m_foodDesc, temp);
 
 			istr >> m_foodPrice;
 			istr.ignore();
