@@ -9,9 +9,8 @@ namespace seneca {
 	{}
 	std::istream& FoodOrder::read(std::istream & istr)
 	{
-		char temp[100]{};
 		if (istr.good()) {
-
+			char temp[100]{};
 			istr.getline(m_name, MAX_NAME_SIZE, ',');
 			if (istr.getline(temp, 100, ',')) { // Check if getline succeeded
 				m_foodDesc = new char[strlen(temp) + 1];
