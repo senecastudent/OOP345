@@ -17,6 +17,10 @@ namespace seneca {
 				m_foodDesc = new char[strlen(temp) + 1];
 				strcpy(m_foodDesc, temp);
 			}
+			else {
+				m_foodDesc = new char[1]; // Allocate memory for an empty string
+				m_foodDesc[0] = '\0'; // Null-terminate the string
+			}
 
 			istr >> m_foodPrice;
 			istr.ignore();

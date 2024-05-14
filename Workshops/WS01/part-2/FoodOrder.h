@@ -9,7 +9,7 @@ namespace seneca {
 	class FoodOrder
 	{
 		char m_name[MAX_NAME_SIZE]{};
-		char* m_foodDesc{};
+		char* m_foodDesc;
 		double m_foodPrice{};
 		bool m_dailySpecial{};
 	public:
