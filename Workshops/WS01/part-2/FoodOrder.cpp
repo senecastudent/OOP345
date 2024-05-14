@@ -10,26 +10,22 @@ namespace seneca {
 	std::istream& FoodOrder::read(std::istream & istr)
 	{
 		if (istr.good()) {
-			// Read customer name
-			if (istr.getline(m_name, MAX_NAME_SIZE, ',')) {
-				// Read order description as C-style string
-				char temp[100]{};
-				if (istr.getline(temp, 100, ',')) { 
-					m_foodDesc = new char[strlen(temp) + 1];
-					strcpy(m_foodDesc, temp);
-				}
+			istr.getline(m_name, MAX_NAME_SIZE, ',');
 
-				// Read price
-				istr >> m_foodPrice;
-				istr.ignore();
-
-				// Read daily special status
-				char special{};
-				istr >> special;
-				m_dailySpecial = (special == 'Y');
-
-				istr.ignore(1000, '\n');
+			char temp[100]{};
+			if (istr.getline(temp, 100, ',')) { 
+				m_foodDesc = new char[strlen(temp) + 1];
+				strcpy(m_foodDesc, temp);
 			}
+
+			istr >> m_foodPrice;
+			istr.ignore();
+
+			char special{};
+			istr >> special;
+			m_dailySpecial = (special == 'Y');
+
+			istr.ignore(1000, '\n');
 		}
 		return istr;
 	}
