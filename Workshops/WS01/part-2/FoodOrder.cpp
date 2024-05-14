@@ -13,11 +13,14 @@ namespace seneca {
 		if (istr.good()) {
 
 			istr.getline(m_name, MAX_NAME_SIZE, ',');
-
-			istr.getline(temp, 100, ',');
-
-			m_foodDesc = new char[strlen(temp) + 1];
-			strcpy(m_foodDesc, temp);
+			if (istr.getline(temp, 100, ',')) { // Check if getline succeeded
+				m_foodDesc = new char[strlen(temp) + 1];
+				strcpy(m_foodDesc, temp);
+			}
+			else {
+				m_foodDesc = new char[1]; // Allocate memory for an empty string
+				m_foodDesc[0] = '\0'; // Null-terminate the string
+			}
 
 			istr >> m_foodPrice;
 			istr.ignore();
