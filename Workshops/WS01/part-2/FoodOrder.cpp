@@ -5,15 +5,15 @@ using namespace std;
 	double g_taxrate = 0.0;
 	double g_dailydiscount = 0.0;
 namespace seneca {
-	FoodOrder::FoodOrder() 
+	FoodOrder::FoodOrder() : m_name{}, m_foodDesc{}, m_foodPrice{}, m_dailySpecial{} 
 	{}
 	std::istream& FoodOrder::read(std::istream & istr)
 	{
 		if (istr.good()) {
-			istr.getline(m_name, MAX_NAME_SIZE, ',');
-
 			char temp[100]{};
-			if (istr.getline(temp, 100, ',')) { 
+			
+			istr.getline(m_name, MAX_NAME_SIZE, ',');
+			if (istr.getline(temp, 100, ',')) {
 				m_foodDesc = new char[strlen(temp) + 1];
 				strcpy(m_foodDesc, temp);
 			}
@@ -25,7 +25,7 @@ namespace seneca {
 			istr >> special;
 			m_dailySpecial = (special == 'Y');
 
-			istr.ignore(1000, '\n');
+			istr.ignore(1000,'\n');
 		}
 		return istr;
 	}
