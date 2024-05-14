@@ -66,9 +66,7 @@ namespace seneca {
 
 	FoodOrder::~FoodOrder()
 	{
-		if (m_foodDesc != nullptr) {
-			delete[] m_foodDesc;
-			m_foodDesc = nullptr;
-		}
+		delete[] m_foodDesc;
+		m_foodDesc = nullptr;
 	}
 }
