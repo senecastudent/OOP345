@@ -7,6 +7,30 @@ using namespace std;
 namespace seneca {
 	FoodOrder::FoodOrder() : m_name{}, m_foodDesc{}, m_foodPrice{}, m_dailySpecial{} 
 	{}
+
+	FoodOrder::FoodOrder(const FoodOrder & other)
+	{
+		if (other.m_name && other.m_foodDesc) {
+			strcpy(m_name, other.m_name);
+			m_foodDesc = new char[strlen(other.m_foodDesc) + 1];
+			m_foodPrice = other.m_foodPrice;
+			m_dailySpecial = other.m_dailySpecial;
+		}
+	}
+
+	FoodOrder& FoodOrder::operator=(const FoodOrder& other)
+	{
+		if (&other != this) {
+			delete[] m_foodDesc;
+			strcpy(m_name, other.m_name);
+			m_foodDesc = new char[strlen(other.m_foodDesc) + 1];
+			m_foodPrice = other.m_foodPrice;
+			m_dailySpecial = other.m_dailySpecial;
+		}
+		return *this;
+	}
+
+	
 	std::istream& FoodOrder::read(std::istream & istr)
 	{
 		if (istr.good()) {
