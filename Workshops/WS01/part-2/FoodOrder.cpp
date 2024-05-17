@@ -10,7 +10,7 @@ namespace seneca {
 
 	FoodOrder::FoodOrder(const FoodOrder & other)
 	{
-		if (other.m_name && other.m_foodDesc) {
+		if (other.m_name[0] && other.m_foodDesc[0]) {
 			strcpy(m_name, other.m_name);
 			m_foodDesc = new char[strlen(other.m_foodDesc) + 1];
 			m_foodPrice = other.m_foodPrice;
