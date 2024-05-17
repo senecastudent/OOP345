@@ -10,12 +10,13 @@ namespace seneca {
 
 	FoodOrder::FoodOrder(const FoodOrder & other)
 	{
-		if (other.m_name[0] && other.m_foodDesc[0]) {
 			strcpy(m_name, other.m_name);
-			m_foodDesc = new char[strlen(other.m_foodDesc) + 1];
+			if (other.m_foodDesc) {
+				m_foodDesc = new char[strlen(other.m_foodDesc) + 1];
+				strcpy(m_foodDesc, other.m_foodDesc);
+			}
 			m_foodPrice = other.m_foodPrice;
 			m_dailySpecial = other.m_dailySpecial;
-		}
 	}
 
 	FoodOrder& FoodOrder::operator=(const FoodOrder& other)
@@ -37,7 +38,7 @@ namespace seneca {
 			istr.getline(m_name, MAX_NAME_SIZE, ',');
 			
 			char temp[100]{};
-			
+			delete[] m_foodDesc;
 			if (istr.getline(temp, 100, ',')) {
 				m_foodDesc = new char[strlen(temp) + 1];
 				strcpy(m_foodDesc, temp);
@@ -90,8 +91,7 @@ namespace seneca {
 
 	FoodOrder::~FoodOrder()
 	{
-		if (m_foodDesc != nullptr) {
-			delete[] m_foodDesc;
-		}
+		delete[] m_foodDesc;
+		m_foodDesc = nullptr;
 	}
 }
