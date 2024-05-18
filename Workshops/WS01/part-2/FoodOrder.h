@@ -3,7 +3,6 @@
 #include <iostream>
 	extern double g_taxrate;
 	extern double g_dailydiscount;
-	extern int cout;
 namespace seneca {
 	const int MAX_NAME_SIZE = 10;
 	class FoodOrder
