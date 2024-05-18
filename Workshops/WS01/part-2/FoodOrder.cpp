@@ -44,8 +44,8 @@ namespace seneca {
             istr.getline(m_name, MAX_NAME_SIZE, ',');
 
             char temp[100]{};
-            delete[] m_foodDesc;  // Delete any existing description before reading a new one
-            m_foodDesc = nullptr; // Ensure m_foodDesc is set to nullptr after deletion
+            delete[] m_foodDesc;
+            m_foodDesc = nullptr;
 
             if (istr.getline(temp, 100, ',')) {
                 m_foodDesc = new char[strlen(temp) + 1];
@@ -64,7 +64,7 @@ namespace seneca {
         return istr;
     }
 
-    void FoodOrder::display() const
+    std::ostream& FoodOrder::display(ostream& ostr) const
     {
         static int count = 1;
         double billAmt = m_foodPrice * g_taxrate + m_foodPrice;
@@ -95,11 +95,12 @@ namespace seneca {
             std::cout << count++ << ". ";
             std::cout << "No Order" << std::endl;
         }
+        return ostr;
     }
 
     FoodOrder::~FoodOrder()
     {
         delete[] m_foodDesc;
-        m_foodDesc = nullptr; // Ensure m_foodDesc is set to nullptr after deletion
+        m_foodDesc = nullptr;
     }
 }

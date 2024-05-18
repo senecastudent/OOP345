@@ -17,7 +17,7 @@ namespace seneca {
 		FoodOrder(const FoodOrder& other);
 		FoodOrder& operator=(const FoodOrder& other);
 		std::istream& read(std::istream& istr = std::cin);
-		void display()const;
+		std::ostream& display(std::ostream& ostr = std::cout)const;
 		virtual ~FoodOrder();
 	};
 }
