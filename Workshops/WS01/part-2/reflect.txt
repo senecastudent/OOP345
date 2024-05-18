@@ -1,0 +1,30 @@
+/*/////////////////////////////////////////////////////////////////////////
+				Workshop-1 Reflect
+Full Name  : Divyanshu Dugar
+Student ID#: 177110210
+Email      : ddugar@myseneca.ca
+Section    : ZAA
+Date       : 17/05/2024
+
+Authenticity Declaration:
+I have done all the coding by myself and only copied the code that
+my professor provided to complete my workshops and assignments.
+/////////////////////////////////////////////////////////////////////////*/
+
+In the completion of this workshop, I got to learn a lot of concepts which include:
+
+1. Difference between internal and external linkage: 
+External Linkage - A name with external linkage refers to an entity that is declared in a different scope within another translation unit. The C++ keyword extern identifies external linkage. For the workshop we used "extern double g_taxrate;" and "extern double g_dailydiscount;." 
+Internal linkage - A name with internal linkage refers to an entity that is invisible outside its translation unit, but visible to other scopes within its translation unit. The C++ keyword static identifies internal linkage. For the workshop, we used "static int count = 1;" - Global throughout the program with limited scope, in the display function.
+
+2. Static variables exist for the lifetime of the program, retaining their values between function calls.
+
+3. For upgrading the FoodOrder class in part 2:
+a. We had to convert the char array into a char pointer which will be dynamically allocated depending on the size of the food description read from the file. 
+b. Since we had resources outside of class and to manage resources properly we had to implement the RULE OF 3 - copy constructor, copy assignment, destructor.
+
+4. I also understood about how main function receives 2 arguments, int argc (the count of arguments), char* argv[] (the argument values)
+
+5. This workshop helped me recollect the cout/ostream class methods used for formatting like (width, fill, setf, and more)
+
+6. Global Variables and extern Keyword: Lastly, this workshop helped me understand the concept of global variables properly using the keyword extern.
