@@ -6,10 +6,10 @@
 	extern double g_taxrate;
 	extern double g_dailydiscount;
 namespace seneca {
-	const int SIZE = 10;
+	const int MAX_SIZE = 10;
 	class FoodOrder
 	{
-		char m_name[SIZE]{};
+		char m_name[MAX_SIZE]{};
 		char* m_Description{};
 		double m_Price{};
 		bool m_Special{};
