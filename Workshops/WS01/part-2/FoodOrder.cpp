@@ -37,7 +37,7 @@ namespace seneca {
     std::istream& FoodOrder::read(std::istream& is)
     {
         if (!is.fail()) {
-            is.getline(m_name, SIZE, ',');
+            is.getline(m_name, MAX_SIZE, ',');
 
             char temp[100]{};
             delete[] m_Description;
