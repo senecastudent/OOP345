@@ -17,12 +17,12 @@ my professor provided to complete my workshops and assignments.
 	extern double g_taxrate;
 	extern double g_dailydiscount;
 namespace seneca {
-	const int MAX_NAME_SIZE = 10;
+	const int SIZE = 10;
 	class FoodOrder
 	{
-		char m_name[MAX_NAME_SIZE]{};
-		char* m_foodDesc{};
-		double m_foodPrice{};
+		char m_name[SIZE]{};
+		char* m_Desc{};
+		double m_Price{};
 		bool m_dailySpecial{};
 	public:
 		FoodOrder();

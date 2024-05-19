@@ -20,32 +20,33 @@ double g_taxrate = 0.0;
 double g_dailydiscount = 0.0;
 
 namespace seneca {
-    FoodOrder::FoodOrder() : m_name{}, m_foodDesc(nullptr), m_foodPrice(0.0), m_dailySpecial(false)
+    FoodOrder::FoodOrder() : m_name{}, m_Desc{}, m_Price{}, m_dailySpecial{false}
     {}
-
-    FoodOrder::FoodOrder(const FoodOrder& other) : m_name{}, m_foodDesc(nullptr), m_foodPrice(other.m_foodPrice), m_dailySpecial(other.m_dailySpecial)
+    // Copy constructor
+    FoodOrder::FoodOrder(const FoodOrder& other)
     {
         strcpy(m_name, other.m_name);
-        if (other.m_foodDesc) {
-            m_foodDesc = new char[strlen(other.m_foodDesc) + 1];
-            strcpy(m_foodDesc, other.m_foodDesc);
+        if (other.m_Desc) {
+            m_Desc = new char[strlen(other.m_Desc) + 1];
+            strcpy(m_Desc, other.m_Desc);
         }
+        m_Price = other.m_Price;
+        m_dailySpecial = other.m_dailySpecial;
     }
-
+    // Copy assignment
     FoodOrder& FoodOrder::operator=(const FoodOrder& other)
     {
         if (this != &other) {
-            delete[] m_foodDesc;
-
+            delete[] m_Desc; // Deleting any previously allocated memory
             strcpy(m_name, other.m_name);
-            if (other.m_foodDesc) {
-                m_foodDesc = new char[strlen(other.m_foodDesc) + 1];
-                strcpy(m_foodDesc, other.m_foodDesc);
+            if (other.m_Desc) {
+                m_Desc = new char[strlen(other.m_Desc) + 1];
+                strcpy(m_Desc, other.m_Desc);
             }
             else {
-                m_foodDesc = nullptr;
+                m_Desc = nullptr;
             }
-            m_foodPrice = other.m_foodPrice;
+            m_Price = other.m_Price;
             m_dailySpecial = other.m_dailySpecial;
         }
         return *this;
@@ -54,33 +55,29 @@ namespace seneca {
     std::istream& FoodOrder::read(std::istream& istr)
     {
         if (istr.good()) {
-            istr.getline(m_name, MAX_NAME_SIZE, ',');
+            istr.getline(m_name, SIZE, ',');
 
             char temp[100]{};
-            delete[] m_foodDesc;
-            m_foodDesc = nullptr;
-
+            delete[] m_Desc;
+            m_Desc = nullptr;
             if (istr.getline(temp, 100, ',')) {
-                m_foodDesc = new char[strlen(temp) + 1];
-                strcpy(m_foodDesc, temp);
+                m_Desc = new char[strlen(temp) + 1];
+                strcpy(m_Desc, temp);
             }
-
-            istr >> m_foodPrice;
+            istr >> m_Price;
             istr.ignore();
-
             char special{};
             istr >> special;
             m_dailySpecial = (special == 'Y');
-
             istr.ignore(1000, '\n');
         }
         return istr;
     }
 
-    std::ostream& FoodOrder::display(ostream& ostr) const
+    std::ostream& FoodOrder::display(ostream& os) const
     {
         static int count = 1;
-        double billAmt = m_foodPrice * g_taxrate + m_foodPrice;
+        double billAmt = m_Price * g_taxrate + m_Price;
         if (m_name[0]) {
             std::cout.width(2);
             std::cout.setf(ios::left);
@@ -88,7 +85,7 @@ namespace seneca {
             std::cout.width(10);
             std::cout << m_name << "|";
             std::cout.width(25);
-            std::cout << (m_foodDesc ? m_foodDesc : "No Description") << "|";
+            std::cout << (m_Desc ? m_Desc : "No Description") << "|";
             std::cout.width(12);
             std::cout.precision(2);
             std::cout.setf(ios::fixed);
@@ -108,12 +105,12 @@ namespace seneca {
             std::cout << count++ << ". ";
             std::cout << "No Order" << std::endl;
         }
-        return ostr;
+        return os;
     }
-
+    // Destructor
     FoodOrder::~FoodOrder()
     {
-        delete[] m_foodDesc;
-        m_foodDesc = nullptr;
+        delete[] m_Desc;
+        m_Desc = nullptr;
     }
 }
