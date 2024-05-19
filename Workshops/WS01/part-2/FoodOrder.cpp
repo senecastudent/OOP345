@@ -1,15 +1,4 @@
-/*/////////////////////////////////////////////////////////////////////////
-                        Workshop-1 Part-2
-Full Name  : Keshav Bathla
-Student ID#: 106268238
-Email      : kbathla@myseneca.ca
-Section    : ZAA
-Date       : 19/05/2024
 
-Authenticity Declaration:
-I have done all the coding by myself and only copied the code that
-my professor provided to complete my workshops and assignments.
-/////////////////////////////////////////////////////////////////////////*/
 
 #include <iostream>
 #include <cstring>
@@ -20,81 +9,75 @@ double g_taxrate = 0.0;
 double g_dailydiscount = 0.0;
 
 namespace seneca {
-    FoodOrder::FoodOrder() : m_name{}, m_Desc{}, m_Price{}, m_dailySpecial{false}
-    {}
-    // Copy constructor
+    FoodOrder::FoodOrder() : m_name{}, m_Description{}, m_Price{}, m_Special{} {}
+
     FoodOrder::FoodOrder(const FoodOrder& other)
     {
-        strcpy(m_name, other.m_name);
-        if (other.m_Desc) {
-            m_Desc = new char[strlen(other.m_Desc) + 1];
-            strcpy(m_Desc, other.m_Desc);
-        }
-        m_Price = other.m_Price;
-        m_dailySpecial = other.m_dailySpecial;
+        operator=(other);
     }
-    // Copy assignment
+
     FoodOrder& FoodOrder::operator=(const FoodOrder& other)
     {
         if (this != &other) {
-            delete[] m_Desc; // Deleting any previously allocated memory
+            delete[] m_Description; 
             strcpy(m_name, other.m_name);
-            if (other.m_Desc) {
-                m_Desc = new char[strlen(other.m_Desc) + 1];
-                strcpy(m_Desc, other.m_Desc);
+            if (other.m_Description) {
+                m_Description = new char[strlen(other.m_Description) + 1];
+                strcpy(m_Description, other.m_Description);
             }
             else {
-                m_Desc = nullptr;
+                m_Description = nullptr;
             }
             m_Price = other.m_Price;
-            m_dailySpecial = other.m_dailySpecial;
+            m_Special = other.m_Special;
         }
         return *this;
     }
 
-    std::istream& FoodOrder::read(std::istream& istr)
+    std::istream& FoodOrder::read(std::istream& is)
     {
-        if (!istr.fail()) {
-            istr.getline(m_name, SIZE, ',');
+        if (!is.fail()) {
+            is.getline(m_name, SIZE, ',');
 
             char temp[100]{};
-            delete[] m_Desc;
-            m_Desc = nullptr;
-            if (istr.getline(temp, 100, ',')) {
-                m_Desc = new char[strlen(temp) + 1];
-                strcpy(m_Desc, temp);
-            }
-            istr >> m_Price;
-            istr.ignore();
+            delete[] m_Description;
+            m_Description = nullptr;
+            is.getline(temp, 100, ',');
+            m_Description = new char[strlen(temp) + 1];
+            strcpy(m_Description, temp);
+         
+            is >> m_Price;
+            is.ignore();
             char special{};
-            istr >> special;
-            m_dailySpecial = (special == 'Y');
-            istr.ignore(1000, '\n');
+            is >> special;
+            m_Special = (special == 'Y');
+            is.ignore(1000, '\n');
         }
-        return istr;
+        return is;
     }
 
     std::ostream& FoodOrder::display(ostream& os) const
     {
-        static int count = 1;
-        double billAmt = m_Price * g_taxrate + m_Price;
+        static int c = 1;
         if (m_name[0]) {
             std::cout.width(2);
             std::cout.setf(ios::left);
-            std::cout << count++ << ". ";
+            std::cout << c++ << ". ";
             std::cout.width(10);
-            std::cout << m_name << "|";
+            std::cout << m_name;
+            std::cout << "|";
             std::cout.width(25);
-            std::cout << (m_Desc ? m_Desc : "No Description") << "|";
+            std::cout << (m_Description ? m_Description : "No Description");
+            std::cout << "|";
             std::cout.width(12);
             std::cout.precision(2);
             std::cout.setf(ios::fixed);
-            std::cout << billAmt << "|";
+            std::cout << m_Price * g_taxrate + m_Price << "|";
             std::cout.unsetf(ios::left);
-            if (m_dailySpecial) {
+            if (m_Special) {
                 std::cout.width(13);
                 std::cout.setf(ios::right);
-                std::cout << billAmt - g_dailydiscount;
+                std::cout << (m_Price * g_taxrate + m_Price) - g_dailydiscount;
                 std::cout.unsetf(ios::right);
             }
             std::cout << std::endl;
@@ -102,15 +85,15 @@ namespace seneca {
         else {
             std::cout.width(2);
             std::cout.setf(ios::left);
-            std::cout << count++ << ". ";
+            std::cout << c++ << ". ";
             std::cout << "No Order" << std::endl;
         }
         return os;
     }
-    // Destructor
+    
     FoodOrder::~FoodOrder()
     {
-        delete[] m_Desc;
-        m_Desc = nullptr;
+        delete[] m_Description;
+        m_Description = nullptr;
     }
 }

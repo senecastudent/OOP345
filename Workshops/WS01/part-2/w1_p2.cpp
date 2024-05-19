@@ -1,15 +1,4 @@
-/*/////////////////////////////////////////////////////////////////////////
-						Workshop-1 Part-2
-Full Name  : Keshav Bathla
-Student ID#: 106268238
-Email      : kbathla@myseneca.ca
-Section    : ZAA
-Date       : 19/05/2024
 
-Authenticity Declaration:
-I have done all the coding by myself and only copied the code that
-my professor provided to complete my workshops and assignments.
-/////////////////////////////////////////////////////////////////////////*/
 
 #include <iostream>
 #include <fstream>
@@ -36,9 +25,9 @@ int cout = 0; // won't compile if headers don't follow convention regarding name
 
 // TODO: write the prototype for the main function
 //         to accept command line arguments
-int main(int argc, char* argv[]);
+int main(int argc, char** argv);
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 	std::cout << "Command Line:\n";
 	std::cout << "--------------------------\n";
